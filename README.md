@@ -6,6 +6,9 @@ Qlearning4k is a reinforcement learning add-on for the python deep learning libr
  **Example :**
 
 ```python
+from keras.models import Sequential
+from keras.layers import Dense, Flatten
+from keras.optimizers import sgd
 from qlearning4k.games import Catch
 from qlearning4k import Agent
 
