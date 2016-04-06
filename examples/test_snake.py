@@ -17,7 +17,7 @@ model.add(Dense(256, activation='relu'))
 model.add(Dense(nb_actions))
 model.compile(RMSprop(), 'MSE')
 
-snake = Snake(grid_size=10, snake_length=3)
+snake = Snake(grid_size)
 
 agent = Agent(model=model, memory_size=-1, nb_frames=nb_frames)
 agent.train(snake, batch_size=64, nb_epoch=10000, gamma=0.8)
