@@ -1,5 +1,4 @@
 from keras.models import Sequential
-from qlearn import QLearn
 from keras.layers import Flatten, Dense
 from qlearning4k.games import Catch
 from keras.optimizers import *
