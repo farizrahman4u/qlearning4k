@@ -2,6 +2,7 @@ from memory import ExperienceReplay
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
+import os
 
 class Agent:
 
@@ -123,7 +124,9 @@ class Agent:
   				win_count += 1
 		print("Accuracy {} %".format(100. * win_count / nb_epoch))
  		if visualize:
+ 			if 'images' not in os.listdir('.'):
+ 				os.mkdir('images')
  			for i in range(len(frames)):
  				plt.imshow(frames[i], interpolation='none')
- 				plt.savefig("pics/" + game.name + str(i) + ".png")
+ 				plt.savefig("images/" + game.name + str(i) + ".png")
  
