@@ -15,7 +15,6 @@ class Snake(Game):
         self.reset()
         self.state_changed = True
 
-
     @property
     def name(self):
         return "Snake"
