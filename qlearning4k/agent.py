@@ -49,7 +49,7 @@ class Agent:
 			self.frames = np.array([frame] * self.nb_frames)
 			self.frames = [frame] * self.nb_frames
 		else:
-			self.frames = np.roll(self.frames, -2)
+			self.frames = np.roll(self.frames, -1)
 			self.frames[-1] = frame
 		return np.expand_dims(self.frames, 0)
 
