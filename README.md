@@ -25,6 +25,6 @@ model.compile(sgd(lr=.2), "mse")
 game = Catch(grid_size)
 agent = Agent(model)
 agent.train(game)
-agent.play()
+agent.play(game)
 ```
 
