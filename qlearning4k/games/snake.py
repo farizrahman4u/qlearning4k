@@ -23,6 +23,7 @@ class Snake(Game):
         return 5
 
     def play(self, action):
+        assert action in range(5), "Invalid action."
         self.scored = False
         self.move_snake(action)
         if self.fruit == self.snake[0]:
@@ -69,11 +70,11 @@ class Snake(Game):
         head = self.snake[0]
         if action == 0:
             p = (head[0] - 1, head[1])
-        if action == 1:
+        elif action == 1:
             p = (head[0] + 1, head[1])
-        if action == 2:
+        elif action == 2:
             p = (head[0], head[1] - 1)
-        if action == 3:
+        elif action == 3:
             p = (head[0], head[1] + 1)
         self.snake.insert(0, p)
         self.snake.pop()
