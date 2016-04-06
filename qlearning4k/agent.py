@@ -2,8 +2,6 @@ from memory import ExperienceReplay
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
-import cPickle
-import random
 
 class Agent:
 
@@ -79,7 +77,7 @@ class Agent:
 			S = self.get_game_data(game)
 			while not game_over:
 				if np.random.random() < epsilon:
-					a = random.randint(0, game.nb_actions)
+					a = int(np.random.randint(game.nb_actions))
 				else:
 					q = model.predict(S)
 					a = int(np.argmax(q[0]))
@@ -112,7 +110,7 @@ class Agent:
  			while not game_over:
  				if np.random.rand() < epsilon:
  					print("random")
- 					action = random.randint(0, game.nb_actions)
+ 					action = int(np.random.randint(0, game.nb_actions))
  				else:
  					q = model.predict(S)			
  					action = int(np.argmax(q[0]))
