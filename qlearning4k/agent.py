@@ -47,10 +47,10 @@ class Agent:
 	def get_game_data(self, game):
 		frame = game.get_frame()
 		if self.frames is None:
-			self.frames = np.array([frame] * self.nb_frames)
+			self.frames = [frame] * self.nb_frames
 		else:
-			self.frames = np.roll(self.frames, -1)
-			self.frames[-1] = frame
+			self.frames.append(frame)
+			self.frames.pop(0)
 		return np.expand_dims(self.frames, 0)
 
 	def clear_frames(self):
