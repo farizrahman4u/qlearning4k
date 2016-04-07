@@ -31,7 +31,7 @@ class Agent:
 		self.memory.memory_size = value
 
 	def reset_memory(self):
-		self.exp_replay.memory = []
+		self.exp_replay.reset_memory()
 
 	def check_game_compatibility(self, game):
 		game_output_shape = (1, None) + game.get_frame().shape
@@ -86,8 +86,8 @@ class Agent:
 				r = game.get_score()
 				S_prime = self.get_game_data(game)
 				game_over = game.is_over()
-				transition = [S, a, r, S_prime]
-				self.memory.remember(transition, game_over)
+				transition = [S, a, r, S_prime, game_over]
+				self.memory.remember(*transition)
 				S = S_prime
 				inputs, targets = self.memory.get_batch(model=model, batch_size=batch_size, gamma=gamma)
 				loss += model.train_on_batch(inputs, targets)[0]
