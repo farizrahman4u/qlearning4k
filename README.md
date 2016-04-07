@@ -3,7 +3,7 @@ Q-learning for Keras
 
 Qlearning4k is a reinforcement learning add-on for the python deep learning library [Keras](www.github.com/fchollet/keras). Its simple, and is ideal for rapid prototyping.
 
-![catch](http://gifmaker.cc/PlayGIFAnimation.php?folder=20160406131W1LrEada2aFXCu4vHpIre&file=output_feMHZz.gif)
+![catch](gifs/catch.gif)     ![snake](gifs/snake.gif)
 
  **Example :**
 
