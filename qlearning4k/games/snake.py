@@ -114,19 +114,19 @@ class Snake(Game):
             self.border += [(z, 0), (z, grid_size - 1), (0, z), (grid_size - 1, z)]
 
     def left(self):
-        self.update_state(0)
+        self.play(0)
 
     def right(self):
-        self.update_state(1)
+        self.play(1)
 
     def up(self):
-        self.update_state(2)
+        self.play(2)
 
     def down(self):
-        self.update_state(3)
+        self.play(3)
 
     def idle(self):
-        self.update_state(4)
+        self.play(4)
 
     def self_bite(self):
         if len(self.snake) > len(set(self.snake)):
