@@ -135,7 +135,11 @@ Checkout the examples. Should get you started. You can easily get it to work wit
 * `game` : The game to play
 
 * `nb_eopch` : Number of epochs to play
+
+
 ___________________________________________________
+
+
 **References:**:
 * [Playing Atari with Deep Reinforcement Learning](Playing Atari with Deep Reinforcement Learning)
 * [Human-level control through deep reinforcement learning](www.nature.com/articles/nature14236)
