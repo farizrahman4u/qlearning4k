@@ -48,7 +48,6 @@ class Agent:
 		frame = game.get_frame()
 		if self.frames is None:
 			self.frames = np.array([frame] * self.nb_frames)
-			self.frames = [frame] * self.nb_frames
 		else:
 			self.frames = np.roll(self.frames, -1)
 			self.frames[-1] = frame
