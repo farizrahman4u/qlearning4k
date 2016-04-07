@@ -1,6 +1,6 @@
 import numpy as np
-import operator
 from random import sample
+
 
 class Memory:
 
@@ -21,32 +21,34 @@ class ExperienceReplay(Memory):
 		self._memory_size = memory_size
 
 	def remember(self, s, a, r, s_prime, game_over):
-		self.memory.append([s, a, r, s_prime, game_over])
+		self.input_shape = s.shape[1:]
+		self.memory.append(np.concatenate([s.flatten(), np.array(a).flatten(), np.array(r).flatten(), s_prime.flatten(), 1 * np.array(game_over).flatten()]))
 		if self.memory_size > 0 and len(self.memory) > self.memory_size:
 			self.memory.pop(0)
 
 	def get_batch(self, model, batch_size, gamma=0.9):
 		if len(self.memory) < batch_size:
 			batch_size = len(self.memory)
-		# Pick 'batch_size' number of random elements from memory
-		batch = sample(self.memory, batch_size)
-		S = np.array(map(lambda x:x[0], batch))  # (batch_size, 1, nb_frames) + game.output_shape
-		S = np.squeeze(S, 1)  # (batch_size, nb_frames) + game.output_shape
-		S_prime = np.array(map(lambda x:x[3], batch))  # (batch_size, 1, nb_frames) + game.output_shape
-		S_prime = np.squeeze(S_prime, 1)  # (batch_size, nb_frames) + game.output_shape
-		X = np.concatenate([S, S_prime], axis=0)  # (2 * batch_size, nb_frames) + game.output_shape
-		Y = model.predict(X)  # (2 * batch_size, nb_actions)
-		a = Y[:batch_size]  # (batch_size, nb_actions)
-		r = np.max(Y[batch_size:], axis=1)  # (batch_size,)`
-		# Set correct reward
-		for i, experience in enumerate(batch):
-			action = experience[1]
-			reward = experience[2]
-			game_over = experience[4]
-			if not game_over:
-				reward += gamma * r[i]
-			a[i, action] = reward
-		return S, a
+		nb_actions = model.output_shape[-1]
+		samples = np.array(sample(self.memory, batch_size))
+		input_dim = np.prod(self.input_shape)
+		S = samples[:, 0 : input_dim]
+		a = samples[:, input_dim]
+		r = samples[:, input_dim + 1]
+		S_prime = samples[:, input_dim + 2 : 2 * input_dim + 2]
+		game_over = samples[:, 2 * input_dim + 2]
+		r = r.repeat(nb_actions).reshape((batch_size, nb_actions))
+		game_over = game_over.repeat(nb_actions).reshape((batch_size, nb_actions))
+		S = S.reshape((batch_size, ) + self.input_shape)
+		S_prime = S_prime.reshape((batch_size, ) + self.input_shape)
+		X = np.concatenate([S, S_prime], axis=0)
+		Y = model.predict(X)
+		Qsa = np.max(Y[batch_size:], axis=1).repeat(nb_actions).reshape((batch_size, nb_actions))
+		delta = np.zeros((batch_size, nb_actions))
+		a = np.cast['int'](a)
+		delta[np.arange(batch_size), a] = 1
+		targets = (1 - delta) * Y[:batch_size] + delta * (r + gamma * (1 - game_over) * Qsa)
+		return S, targets
 
 	@property
 	def memory_size(self):
