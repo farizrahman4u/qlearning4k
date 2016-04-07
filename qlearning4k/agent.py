@@ -101,6 +101,7 @@ class Agent:
  		self.check_game_compatibility(game)
  		model = self.model
  		win_count = 0
+ 		frames = []
  		for epoch in range(nb_epoch):
  			game.reset()
  			self.clear_frames()
