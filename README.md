@@ -139,8 +139,8 @@ ___________________________________________________
 **References:**:
 * [Playing Atari with Deep Reinforcement Learning](Playing Atari with Deep Reinforcement Learning)
 * [Human-level control through deep reinforcement learning](www.nature.com/articles/nature14236)
+* 
 ____________________________________________________
-
 **TODO**:
 * Add items to the TODO list
 * Remove the item that says "Add items to the TODO list" and the one after it from the TODO list.
