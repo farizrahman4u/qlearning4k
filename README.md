@@ -35,7 +35,7 @@ agent.play(game)
 Reinforcement learning is all about training an agent to behave in an environment (such as a video game) so as to optimize a quantity (maximizing the game score), by performing certain actions in the environment (pressing buttons on the controller) and observing what happens. For every action it does, the agent gets a positive, negetive or a zero reward from the environment. These rewards help the agent understand what effect its action had on the environment, and the agent learns to do actions that are likely to result in a higher cumulative reward.
 
 You would have probably already seen DeepMind's Q-learing model play Atari Breakout like a boss, if not then have a look : [Google DeepMind's Deep Q-learning playing Atari Breakout](https://www.youtube.com/watch?v=V1eYniJ0Rnk).
-The related papers can be found under "references", but if you are not a pdf guy (or gal..(just kidding (I mean, what are the odds?)), I suggest this Nervana's post on the topic: [Nervana](http://www.nervanasys.com/demystifying-deep-reinforcement-learning/)
+The related papers can be found under "references", but if you are not a pdf guy (or gal..(just kidding (I mean, what are the odds?)), I suggest this [Nervana's post on the topic](http://www.nervanasys.com/demystifying-deep-reinforcement-learning/).
 
 OK, now lets do the math.
 
