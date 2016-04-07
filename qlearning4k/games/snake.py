@@ -129,12 +129,10 @@ class Snake(Game):
         self.play(4)
 
     def self_bite(self):
-        if len(self.snake) > len(set(self.snake)):
-            return True
+        return len(self.snake) > len(set(self.snake))
 
     def hit_border(self):
-        if self.snake[0] in self.border or self.snake[-1] in self.border:
-            return True
+        return self.snake[0] in self.border or self.snake[-1] in self.border
 
     def is_over(self):
         return self.self_bite() or self.hit_border()
