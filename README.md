@@ -138,9 +138,37 @@ Checkout the examples. Should get you started. You can easily get it to work wit
 
 
 ___________________________________________________
+ 
+ 
+ **Requirements:**
+
+* [Keras](www.keras.io)
+* [Matplotlib](www.matplotlib.org)
 
 
-**References:**:
+___________________________________________________
+
+
+**Installation**
+
+```shell
+git clone http://www.github.com/farizrahman4u/qlearning4k.git
+cd qlearning4k
+python setup.py install
+```
+
+**Running Example:**
+
+```shell
+cd examples
+python catch.py
+python test_snake.py
+```
+
+_______________________________________________________
+
+
+**References:**
 * [Playing Atari with Deep Reinforcement Learning](Playing Atari with Deep Reinforcement Learning)
 * [Human-level control through deep reinforcement learning](www.nature.com/articles/nature14236)
 
