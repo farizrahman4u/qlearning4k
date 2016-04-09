@@ -63,7 +63,7 @@ But the structure of the neural network model is different, it returns the expec
 Here **q1, q2, .. qn** are the expected max-scores (Q values) for each of the possible actions **a1, a2, .. an** respectively. So the agent simply does the action with the highest reward. 
 In the context of this repo, **M** is just a Keras model, which takes **S** as input and outputs the Q values. The number of Q values output by the model equals the number of possible actions in the game. In a game of catch, you can go left, go right, or just stay still. So 3 actions, which means 3 Q values, one for each action.
 
-Now you can redefine the required function **F** in terms of the neral network **M** :
+Now you can redefine the required function **F** in terms of the nueral network **M** :
 
 **F(S) = argmax(M(S))**
 
@@ -74,7 +74,7 @@ Now where do we get these Q values from to train the model? From the Q function.
 Lets officially define the **Q** function :
 
 **Q(S, a)** = Maximum score your agent will get by the end of the game, if he does action **a** when the game is in state **S**
-Now we know that on performing action **a**, the game will jump to a new state **S'**, also giving the agent an immediete reward **r**. 
+We know that on performing action **a**, the game will jump to a new state **S'**, also giving the agent an immediete reward **r**. 
 
 **S' = Gs(S, a)**
 
