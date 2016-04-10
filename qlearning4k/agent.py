@@ -1,4 +1,4 @@
-from memory import ExperienceReplay
+from .memory import ExperienceReplay
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img

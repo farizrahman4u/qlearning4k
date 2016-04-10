@@ -1,7 +1,7 @@
 __author__ = "Eder Santana"
 
 import numpy as np
-from game import Game
+from .game import Game
 
 
 class Catch(Game):

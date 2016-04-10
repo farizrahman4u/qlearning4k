@@ -1,7 +1,7 @@
 __author__ = "Fariz Rahman"
 
 import numpy as np
-from game import Game
+from .game import Game
 
 
 actions = {0:'left', 1:'right', 2:'up', 3:'down', 4:'idle'}
