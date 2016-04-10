@@ -157,6 +157,11 @@ cd qlearning4k
 python setup.py install
 ```
 
+Alternatively by using `pip`:
+```shell
+pip install git+http://www.github.com/farizrahman4u/qlearning4k.git
+```
+
 **Running Example:**
 
 ```shell
