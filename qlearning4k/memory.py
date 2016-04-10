@@ -52,7 +52,7 @@ class ExperienceReplay(Memory):
 
 	@property
 	def memory_size(self):
-	    return self._memory_size
+		return self._memory_size
 
 	@memory_size.setter
 	def memory_size(self, value):
