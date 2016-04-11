@@ -5,11 +5,11 @@ class Game:
 
 	@property
 	def name(self):
-	    return "Game"
+		return "Game"
 	
 	@property
 	def nb_actions(self):
-	    return 0
+		return 0
 	
 	def reset(self):
 		pass

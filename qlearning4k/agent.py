@@ -1,4 +1,4 @@
-from memory import ExperienceReplay
+from .memory import ExperienceReplay
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -24,7 +24,7 @@ class Agent:
 
 	@property
 	def memory_size(self):
-	    return self.memory.memory_size
+		return self.memory.memory_size
 
 	@memory_size.setter
 	def memory_size(self, value):
@@ -96,37 +96,37 @@ class Agent:
 				epsilon -= delta
 			print("Epoch {:03d}/{:03d} | Loss {:.4f} | Epsilon {:.2f} | Win count {}".format(epoch + 1, nb_epoch, loss, epsilon, win_count))
 
- 	def play(self, game, nb_epoch=10, epsilon=0., visualize=True):
- 		self.check_game_compatibility(game)
- 		model = self.model
- 		win_count = 0
- 		frames = []
- 		for epoch in range(nb_epoch):
- 			game.reset()
- 			self.clear_frames()
- 			S = self.get_game_data(game)
- 			if visualize:
- 				frames.append(game.draw())
- 			game_over = False
- 			while not game_over:
- 				if np.random.rand() < epsilon:
- 					print("random")
- 					action = int(np.random.randint(0, game.nb_actions))
- 				else:
- 					q = model.predict(S)			
- 					action = int(np.argmax(q[0]))
- 				game.play(action)
- 				S = self.get_game_data(game)
- 				if visualize:
- 					frames.append(game.draw())
-  				game_over = game.is_over()
-  			if game.is_won():
-  				win_count += 1
+	def play(self, game, nb_epoch=10, epsilon=0., visualize=True):
+		self.check_game_compatibility(game)
+		model = self.model
+		win_count = 0
+		frames = []
+		for epoch in range(nb_epoch):
+			game.reset()
+			self.clear_frames()
+			S = self.get_game_data(game)
+			if visualize:
+				frames.append(game.draw())
+			game_over = False
+			while not game_over:
+				if np.random.rand() < epsilon:
+					print("random")
+					action = int(np.random.randint(0, game.nb_actions))
+				else:
+					q = model.predict(S)			
+					action = int(np.argmax(q[0]))
+				game.play(action)
+				S = self.get_game_data(game)
+				if visualize:
+					frames.append(game.draw())
+				game_over = game.is_over()
+			if game.is_won():
+				win_count += 1
 		print("Accuracy {} %".format(100. * win_count / nb_epoch))
- 		if visualize:
- 			if 'images' not in os.listdir('.'):
- 				os.mkdir('images')
- 			for i in range(len(frames)):
- 				plt.imshow(frames[i], interpolation='none')
- 				plt.savefig("images/" + game.name + str(i) + ".png")
+		if visualize:
+			if 'images' not in os.listdir('.'):
+				os.mkdir('images')
+			for i in range(len(frames)):
+				plt.imshow(frames[i], interpolation='none')
+				plt.savefig("images/" + game.name + str(i) + ".png")
  

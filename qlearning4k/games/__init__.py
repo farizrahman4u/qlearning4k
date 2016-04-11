@@ -1,2 +1,2 @@
-from catch import Catch
-from snake import Snake
+from .catch import Catch
+from .snake import Snake
