@@ -108,7 +108,7 @@ Checkout the examples. Should get you started. You can easily get it to work wit
 
 ***__init__***
 
-* `model` : Keras model. Should be shape compatible wit the game and compiled.
+* `model` : Keras model. Should be shape compatible with the game and compiled.
 
 * `memory_size` : Size of your agents memory. Set to -1 for infinite memory
 
