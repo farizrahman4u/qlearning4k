@@ -142,8 +142,8 @@ ___________________________________________________
  
  **Requirements:**
 
-* [Keras](www.keras.io)
-* [Matplotlib](www.matplotlib.org)
+* [Keras](http://keras.io/)
+* [Matplotlib](http://matplotlib.org/)
 
 
 ___________________________________________________
@@ -174,8 +174,8 @@ _______________________________________________________
 
 
 **References:**
-* [Playing Atari with Deep Reinforcement Learning](Playing Atari with Deep Reinforcement Learning)
-* [Human-level control through deep reinforcement learning](www.nature.com/articles/nature14236)
+* [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+* [Human-level control through deep reinforcement learning](http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
 
 ____________________________________________________
 
