@@ -88,8 +88,10 @@ class Agent:
 				transition = [S, a, r, S_prime, game_over]
 				self.memory.remember(*transition)
 				S = S_prime
-				inputs, targets = self.memory.get_batch(model=model, batch_size=batch_size, gamma=gamma)
-				loss += float(model.train_on_batch(inputs, targets))
+				batch = self.memory.get_batch(model=model, batch_size=batch_size, gamma=gamma)
+				if batch:
+					inputs, targets = batch
+					loss += float(model.train_on_batch(inputs, targets))
 			if game.is_won():
 				win_count += 1
 			if epsilon > final_epsilon:
