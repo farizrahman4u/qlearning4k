@@ -9,8 +9,7 @@ nb_frames = 4
 nb_actions = 5
 
 model = Sequential()
-model.add(BatchNormalization(axis=1, input_shape=(nb_frames, grid_size, grid_size)))
-model.add(Convolution2D(16, nb_row=3, nb_col=3, activation='relu'))
+model.add(Convolution2D(16, nb_row=3, nb_col=3, activation='relu', input_shape=(nb_frames, grid_size, grid_size)))
 model.add(Convolution2D(32, nb_row=3, nb_col=3, activation='relu'))
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
