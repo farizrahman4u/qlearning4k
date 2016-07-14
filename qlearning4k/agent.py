@@ -12,7 +12,7 @@ class Agent:
 			self.memory = memory
 		else:
 			self.memory = ExperienceReplay(memory_size)
-		if not nb_frames and not model.input_shape:
+		if not nb_frames and not model.input_shape[1]:
 			raise Exception("Missing argument : nb_frames not provided")
 		elif not nb_frames:
 			nb_frames = model.input_shape[1]
