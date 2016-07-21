@@ -16,6 +16,7 @@ from qlearning4k import Agent
 
 nb_frames = 1
 grid_size = 10
+hidden_size = 100
 
 model = Sequential()
 model.add(Flatten(input_shape=(nb_frames, grid_size, grid_size)))
