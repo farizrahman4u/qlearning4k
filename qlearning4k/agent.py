@@ -93,7 +93,7 @@ class Agent:
 					if batch:
 						inputs, targets = batch
 						loss += float(model.train_on_batch(inputs, targets))
-				if checkpoint and (epoch + 1 - observe) % checkpoint == 0:
+				if checkpoint and ((epoch + 1 - observe) % checkpoint == 0 or epoch + 1 == nb_epoch):
 					model.save_weights('weights.dat')
 			if game.is_won():
 				win_count += 1
