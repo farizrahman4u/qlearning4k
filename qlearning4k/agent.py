@@ -56,7 +56,7 @@ class Agent:
 	def clear_frames(self):
 		self.frames = None
 
-	def train(self, game, nb_epoch=1000, batch_size=50, gamma=0.9, epsilon=[1., .1], epsilon_rate=0.5, reset_memory=False):
+	def train(self, game, nb_epoch=1000, batch_size=50, gamma=0.9, epsilon=[1., .1], epsilon_rate=0.5, reset_memory=False, observe=0):
 		self.check_game_compatibility(game)
 		if type(epsilon)  in {tuple, list}:
 			delta =  ((epsilon[0] - epsilon[1]) / (nb_epoch * epsilon_rate))
@@ -88,13 +88,14 @@ class Agent:
 				transition = [S, a, r, S_prime, game_over]
 				self.memory.remember(*transition)
 				S = S_prime
-				batch = self.memory.get_batch(model=model, batch_size=batch_size, gamma=gamma)
-				if batch:
-					inputs, targets = batch
-					loss += float(model.train_on_batch(inputs, targets))
+				if epoch >= observe:
+					batch = self.memory.get_batch(model=model, batch_size=batch_size, gamma=gamma)
+					if batch:
+						inputs, targets = batch
+						loss += float(model.train_on_batch(inputs, targets))
 			if game.is_won():
 				win_count += 1
-			if epsilon > final_epsilon:
+			if epsilon > final_epsilon and epoch >= observe:
 				epsilon -= delta
 			print("Epoch {:03d}/{:03d} | Loss {:.4f} | Epsilon {:.2f} | Win count {}".format(epoch + 1, nb_epoch, loss, epsilon, win_count))
 
