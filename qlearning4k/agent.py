@@ -76,7 +76,7 @@ class Agent:
 			game_over = False
 			S = self.get_game_data(game)
 			while not game_over:
-				if np.random.random() < epsilon:
+				if np.random.random() < epsilon or epoch < observe:
 					a = int(np.random.randint(game.nb_actions))
 				else:
 					q = model.predict(S)
