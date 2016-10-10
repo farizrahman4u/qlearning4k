@@ -1,4 +1,4 @@
-class Game:
+class Game(object):
 	
 	def __init__(self):
 		self.reset()
