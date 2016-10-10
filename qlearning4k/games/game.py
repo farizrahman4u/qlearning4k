@@ -34,3 +34,6 @@ class Game(object):
 
 	def draw(self):
 		return self.get_state()
+
+	def get_possible_actions(self):
+		return range(self.nb_actions)

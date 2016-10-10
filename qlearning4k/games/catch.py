@@ -68,4 +68,3 @@ class Catch(Game):
 	def is_won(self):
 		fruit_row, fruit_col, basket = self.state[0]
 		return fruit_row == self.grid_size-1 and abs(fruit_col - basket) <= 1
-
