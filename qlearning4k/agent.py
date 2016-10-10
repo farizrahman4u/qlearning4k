@@ -118,8 +118,10 @@ class Agent:
 					print("random")
 					action = int(np.random.randint(0, game.nb_actions))
 				else:
-					q = model.predict(S)			
-					action = int(np.argmax(q[0]))
+					q = model.predict(S)[0]
+					possible_actions = game.get_possible_actions()
+					q = [q[i] for i in possible_actions]
+					action = possible_actions[np.argmax(q)]
 				game.play(action)
 				S = self.get_game_data(game)
 				if visualize:
