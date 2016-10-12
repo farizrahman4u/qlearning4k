@@ -167,7 +167,7 @@ pip install git+http://www.github.com/farizrahman4u/qlearning4k.git
 
 ```shell
 cd examples
-python catch.py
+python test_catch.py
 python test_snake.py
 ```
 
