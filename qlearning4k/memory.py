@@ -95,8 +95,7 @@ class ExperienceReplay(Memory):
         self.batch_function = K.function(inputs=[samples], outputs=[S, targets])
 
     def  one_hot(self, seq, num_classes):
-        import theano.tensor as T
-        return K.equal(K.reshape(seq, (-1, 1)), T.arange(num_classes))
+        return K.one_hot(K.reshape(K.cast(seq, "int32"), (-1, 1)), num_classes)
 
     def get_batch_fast(self, model, batch_size, gamma):
         if len(self.memory) < batch_size:
