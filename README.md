@@ -75,7 +75,7 @@ Now where do we get these Q values from to train the model? From the Q function.
 Lets officially define the **Q** function :
 
 **Q(S, a)** = Maximum score your agent will get by the end of the game, if he does action **a** when the game is in state **S**
-We know that on performing action **a**, the game will jump to a new state **S'**, also giving the agent an immediete reward **r**. 
+We know that on performing action **a**, the game will jump to a new state **S'**, also giving the agent an immediate reward **r**. 
 
 **S' = Gs(S, a)**
 
