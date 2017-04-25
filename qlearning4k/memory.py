@@ -16,10 +16,7 @@ class Memory:
 
 class ExperienceReplay(Memory):
 
-    def __init__(self, memory_size=100, fast=None):
-        assert not fast or K._BACKEND == 'theano', "Fast mode is avaliable only for theano backend."
-        if fast is None and K._BACKEND == 'theano':
-            fast = True
+    def __init__(self, memory_size=100, fast=True):
         self.fast = fast
         self.memory = []
         self._memory_size = memory_size
