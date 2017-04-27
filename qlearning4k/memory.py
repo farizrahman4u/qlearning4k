@@ -16,10 +16,7 @@ class Memory:
 
 class ExperienceReplay(Memory):
 
-    def __init__(self, memory_size=100, fast=None):
-        assert not fast or K._BACKEND == 'theano', "Fast mode is avaliable only for theano backend."
-        if fast is None and K._BACKEND == 'theano':
-            fast = True
+    def __init__(self, memory_size=100, fast=True):
         self.fast = fast
         self.memory = []
         self._memory_size = memory_size
@@ -95,8 +92,7 @@ class ExperienceReplay(Memory):
         self.batch_function = K.function(inputs=[samples], outputs=[S, targets])
 
     def  one_hot(self, seq, num_classes):
-        import theano.tensor as T
-        return K.equal(K.reshape(seq, (-1, 1)), T.arange(num_classes))
+        return K.one_hot(K.reshape(K.cast(seq, "int32"), (-1, 1)), num_classes)
 
     def get_batch_fast(self, model, batch_size, gamma):
         if len(self.memory) < batch_size:
