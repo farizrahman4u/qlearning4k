@@ -32,7 +32,7 @@ class ExperienceReplay(Memory):
             return self.get_batch_fast(model, batch_size, gamma)
         if len(self.memory) < batch_size:
             batch_size = len(self.memory)
-        nb_actions = model.output_shape[-1]
+        nb_actions = model.get_output_shape_at(0)[-1]
         samples = np.array(sample(self.memory, batch_size))
         input_dim = np.prod(self.input_shape)
         S = samples[:, 0 : input_dim]
@@ -99,6 +99,6 @@ class ExperienceReplay(Memory):
             return None
         samples = np.array(sample(self.memory, batch_size))
         if not hasattr(self, 'batch_function'):
-            self.set_batch_function(model, self.input_shape, batch_size, model.output_shape[-1], gamma)
+            self.set_batch_function(model, self.input_shape, batch_size, model.get_output_shape_at(0)[-1], gamma)
         S, targets = self.batch_function([samples])
         return S, targets
