@@ -4,13 +4,16 @@ from qlearning4k.games import Snake
 from keras.optimizers import *
 from qlearning4k import Agent
 
+from keras import backend as K
+K.set_image_dim_ordering('th')
+
 grid_size = 10
 nb_frames = 4
 nb_actions = 5
 
 model = Sequential()
-model.add(Convolution2D(16, nb_row=3, nb_col=3, activation='relu', input_shape=(nb_frames, grid_size, grid_size)))
-model.add(Convolution2D(32, nb_row=3, nb_col=3, activation='relu'))
+model.add(Conv2D(16, (3, 3), activation='relu', input_shape=(nb_frames, grid_size, grid_size)))
+model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dense(nb_actions))

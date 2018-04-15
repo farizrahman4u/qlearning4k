@@ -7,16 +7,16 @@ import os
 class Agent:
 
 	def __init__(self, model, memory=None, memory_size=1000, nb_frames=None):
-		assert len(model.output_shape) == 2, "Model's output shape should be (nb_samples, nb_actions)."
+		assert len(model.get_output_shape_at(0)) == 2, "Model's output shape should be (nb_samples, nb_actions)."
 		if memory:
 			self.memory = memory
 		else:
 			self.memory = ExperienceReplay(memory_size)
-		if not nb_frames and not model.input_shape[1]:
+		if not nb_frames and not model.get_input_shape_at(0)[1]:
 			raise Exception("Missing argument : nb_frames not provided")
 		elif not nb_frames:
-			nb_frames = model.input_shape[1]
-		elif model.input_shape[1] and nb_frames and model.input_shape[1] != nb_frames:
+			nb_frames = model.get_input_shape_at(0)[1]
+		elif model.get_input_shape_at(0)[1] and nb_frames and model.get_input_shape_at(0)[1] != nb_frames:
 			raise Exception("Dimension mismatch : time dimension of model should be equal to nb_frames.")
 		self.model = model
 		self.nb_frames = nb_frames
@@ -34,14 +34,16 @@ class Agent:
 		self.exp_replay.reset_memory()
 
 	def check_game_compatibility(self, game):
+		if len(self.model.input_layers_node_indices) != 1:
+			raise Exception('Multi node input is not supported.')
 		game_output_shape = (1, None) + game.get_frame().shape
-		if len(game_output_shape) != len(self.model.input_shape):
+		if len(game_output_shape) != len(self.model.get_input_shape_at(0)):
 			raise Exception('Dimension mismatch. Input shape of the model should be compatible with the game.')
 		else:
-			for i in range(len(self.model.input_shape)):
-				if self.model.input_shape[i] and game_output_shape[i] and self.model.input_shape[i] != game_output_shape[i]:
+			for i in range(len(self.model.get_input_shape_at(0))):
+				if self.model.get_input_shape_at(0)[i] and game_output_shape[i] and self.model.get_input_shape_at(0)[i] != game_output_shape[i]:
 					raise Exception('Dimension mismatch. Input shape of the model should be compatible with the game.')
-		if len(self.model.output_shape) != 2 or self.model.output_shape[1] != game.nb_actions:
+		if len(self.model.get_output_shape_at(0)) != 2 or self.model.get_output_shape_at(0)[1] != game.nb_actions:
 			raise Exception('Output shape of model should be (nb_samples, nb_actions).')
 
 	def get_game_data(self, game):
@@ -65,7 +67,7 @@ class Agent:
 		else:
 			final_epsilon = epsilon
 		model = self.model
-		nb_actions = model.output_shape[-1]
+		nb_actions = model.get_output_shape_at(0)[-1]
 		win_count = 0
 		for epoch in range(nb_epoch):
 			loss = 0.
@@ -136,4 +138,3 @@ class Agent:
 			for i in range(len(frames)):
 				plt.imshow(frames[i], interpolation='none')
 				plt.savefig("images/" + game.name + str(i) + ".png")
- 
